@@ -1,0 +1,1 @@
+https://github.com/golang/vscode-go/blob/master/extension/src/goToolsInformation.ts
