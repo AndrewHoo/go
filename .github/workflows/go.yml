@@ -35,7 +35,7 @@ jobs:
         go-version: '1.27.1'
 
     - name: Test
-      allow_failure: true
+      continue-on-error: true
       run: ./test.sh
 
     - name: Archive test results
