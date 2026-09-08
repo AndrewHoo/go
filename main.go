@@ -3,5 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello, World!")
+	if 1 == 2 {
+		fmt.Println("Hello, ssWorld!")
+	}
+	fmt.Println("Hello, ssWorld!")
 }

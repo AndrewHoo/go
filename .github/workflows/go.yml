@@ -24,7 +24,12 @@ jobs:
     - name: Build
       run: go build -v ./...
 
+  test:
     - name: Test
-      run: |
-        go install
-        ./test.sh
+      run: ./test.sh
+
+    - name: Archive test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-report
+        path: test-report
