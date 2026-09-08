@@ -1,12 +1,16 @@
 #!/bin/bash
 mkdir -p test-report
-# go test -v
-go test -coverprofile=test-report/coverage.out -covermode=atomic -json > test-report/test.json
+
+# wasteful, runs test extra time just for stdout tty output
+go test -v
+
+go test -coverprofile=test-report/coverage.out -covermode=atomic -json > test-report/test.json; resultCode=%?
 cat test-report/test.json | go tool go-test-report -o test-report/test_report.html 1>/dev/null
 cat test-report/test.json | go tool test-report -o test-report/test_report.md
 go tool cover -html=test-report/coverage.out -o test-report/coverage.html
+
+# wasteful, runs test extra time just for stdout tty output
 go tool go-covercheck test-report/coverage.out
-# go tool go-covercheck --no-color --format md test-report/coverage.out > test-report/coverage.md
 
 go tool go-covercheck --format md test-report/coverage.out > test-report/coverage.md
 sed -i '/|$/! s/$/\\/' test-report/coverage.md
@@ -34,3 +38,5 @@ sed -E -i '
 ' test-report/coverage.md
 
 sed -i -e :a -e 's/^\(\(&nbsp;\)*\) /\1\&nbsp;/;ta' test-report/coverage.md
+
+exit $resultCode
