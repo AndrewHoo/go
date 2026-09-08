@@ -33,3 +33,8 @@ jobs:
       with:
         name: test-report
         path: test-report
+
+    - name: Add Summary
+      run: |
+        cat test-report/test_report.md >> $GITHUB_STEP_SUMMARY
+        cat test-report/coverage.md >> $GITHUB_STEP_SUMMARY
